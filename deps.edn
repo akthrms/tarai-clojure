@@ -1,1 +1,2 @@
-{:deps {}}
+{:deps
+ {criterium {:mvn/version "0.4.6"}}}

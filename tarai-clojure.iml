@@ -9,6 +9,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Deps: org.clojure/clojure:1.10.1" level="project" />
+    <orderEntry type="library" name="Deps: criterium:0.4.6" level="project" />
     <orderEntry type="library" name="Deps: org.clojure/spec.alpha:0.2.176" level="project" />
     <orderEntry type="library" name="Deps: org.clojure/core.specs.alpha:0.2.44" level="project" />
   </component>
