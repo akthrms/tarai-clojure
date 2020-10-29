@@ -94,3 +94,34 @@
 ;    Execution time upper quantile : 50.337993 µs (97.5%)
 ;                    Overhead used : 2.254120 ns
 ```
+
+```clojure
+(defn delay-force-tarai [x y z]
+  (letfn [(tarai [x y z]
+            (if (<= (force x) (force y))
+              (force y)
+              (tarai (delay (tarai (- (force x) 1) y z))
+                     (delay (tarai (- (force y) 1) z x))
+                     (delay (tarai (- (force z) 1) x y)))))]
+    (tarai x y z)))
+```
+
+```clojure
+(bench (delay-force-tarai 13 7 0))
+
+; Evaluation count : 9140220 in 60 samples of 152337 calls.
+;              Execution time mean : 6.758895 µs
+;     Execution time std-deviation : 394.171091 ns
+;    Execution time lower quantile : 6.554295 µs ( 2.5%)
+;    Execution time upper quantile : 7.629930 µs (97.5%)
+;                    Overhead used : 2.249955 ns
+
+(bench (delay-force-tarai 15 5 0))
+
+; Evaluation count : 7537740 in 60 samples of 125629 calls.
+;              Execution time mean : 7.767428 µs
+;     Execution time std-deviation : 267.725678 ns
+;    Execution time lower quantile : 7.582429 µs ( 2.5%)
+;    Execution time upper quantile : 8.461426 µs (97.5%)
+;                    Overhead used : 2.249955 ns
+```
