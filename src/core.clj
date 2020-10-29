@@ -21,5 +21,14 @@
                           result)))))]
       (tarai x y z))))
 
+(defn lazy-tarai [x y z]
+  (letfn [(tarai [x y z]
+            (if (<= (x) (y))
+              (y)
+              (tarai (fn [] (tarai (fn [] (- (x) 1)) y z))
+                     (fn [] (tarai (fn [] (- (y) 1)) z x))
+                     (fn [] (tarai (fn [] (- (z) 1)) x y)))))]
+    (tarai (fn [] x) (fn [] y) (fn [] z))))
+
 (defn -main []
-  (with-progress-reporting (bench (memoized-tarai 15 5 0))))
+  (with-progress-reporting (bench (lazy-tarai 15 5 0))))
