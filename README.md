@@ -66,12 +66,12 @@
 
 ```clojure
 (defn lazy-tarai [x y z]
-  (letfn [(tarai [x y z]
-            (if (<= (x) (y))
-              (y)
-              (tarai (fn [] (tarai (fn [] (- (x) 1)) y z))
-                     (fn [] (tarai (fn [] (- (y) 1)) z x))
-                     (fn [] (tarai (fn [] (- (z) 1)) x y)))))]
+  (letfn [(tarai [fx fy fz]
+            (if (<= (fx) (fy))
+              (fy)
+              (tarai (fn [] (tarai (fn [] (- (fx) 1)) fy fz))
+                     (fn [] (tarai (fn [] (- (fy) 1)) fz fx))
+                     (fn [] (tarai (fn [] (- (fz) 1)) fx fy)))))]
     (tarai (fn [] x) (fn [] y) (fn [] z))))
 ```
 
